@@ -40,7 +40,32 @@ struct TimestampView: View {
                 dateTransfer()
             }
             .padding(5)
+            
             Spacer()
+            
+            if #available(macOS 14.0, *) {
+                EmptyView()
+                    .onChange(of: yearInput, initial: false) { _, _ in handleDate2All() }
+                    .onChange(of: monthInput, initial: false) { _, _ in handleDate2All() }
+                    .onChange(of: dayInput, initial: false) { _, _ in handleDate2All() }
+                    .onChange(of: hourInput, initial: false) { _, _ in handleDate2All() }
+                    .onChange(of: minuteInput, initial: false) { _, _ in handleDate2All() }
+                    .onChange(of: secondInput, initial: false) { _, _ in handleDate2All() }
+                    .onChange(of: unixInput, initial: false) { _, _ in handleUnix2All() }
+                    .onChange(of: stringInput, initial: false) { _, _ in handleString2All() }
+                    .onChange(of: timezone, initial: false) { _, _ in unix2All() }
+            } else {
+                EmptyView()
+                    .onChange(of: yearInput) { _ in handleDate2All() }
+                    .onChange(of: monthInput) { _ in handleDate2All() }
+                    .onChange(of: dayInput) { _ in handleDate2All() }
+                    .onChange(of: hourInput) { _ in handleDate2All() }
+                    .onChange(of: minuteInput) { _ in handleDate2All() }
+                    .onChange(of: secondInput) { _ in handleDate2All() }
+                    .onChange(of: unixInput) { _ in handleUnix2All() }
+                    .onChange(of: stringInput) { _ in handleString2All() }
+                    .onChange(of: timezone) { _ in unix2All() }
+            }
         }
         .scrollIndicators(.never)
         .onAppear {
@@ -91,65 +116,56 @@ struct TimestampView: View {
     @ViewBuilder
     private func dateTransfer() -> some View {
         HStack(spacing: 20) {
-            VStack(alignment: .leading, spacing: 5) {
-//                HStack(spacing: 10) {
-//                    let symbolColor: Color = .primary.opacity(0.8)
-//                    HStack(spacing: 2)  {
-//                        dateTextField($yearInput, "2023", digit: 4, max: 9999)
-//                        Text("-").foregroundColor(symbolColor)
-//                        dateTextField($monthInput, "03", max: 12)
-//                        Text("-").foregroundColor(symbolColor)
-//                        dateTextField($dayInput, "23", max: 31)
-//                    }
-//                    HStack(spacing: 2) {
-//                        dateTextField($hourInput, "09", max: 24)
-//                        Text(":").foregroundColor(symbolColor)
-//                        dateTextField($minuteInput, "23")
-//                        Text(":").foregroundColor(symbolColor)
-//                        dateTextField($secondInput, "30")
-//                    }
-//                }
-//                .frame(height: 35, alignment: .leading)
-                
-                HStack {
-                    textField("1679534610", text: $unixInput)
-                        .focused($focus, equals: .unix)
+                VStack(alignment: .leading, spacing: 5) {
+                    //                HStack(spacing: 10) {
+                    //                    let symbolColor: Color = .primary.opacity(0.8)
+                    //                    HStack(spacing: 2)  {
+                    //                        dateTextField($yearInput, "2023", digit: 4, max: 9999)
+                    //                        Text("-").foregroundColor(symbolColor)
+                    //                        dateTextField($monthInput, "03", max: 12)
+                    //                        Text("-").foregroundColor(symbolColor)
+                    //                        dateTextField($dayInput, "23", max: 31)
+                    //                    }
+                    //                    HStack(spacing: 2) {
+                    //                        dateTextField($hourInput, "09", max: 24)
+                    //                        Text(":").foregroundColor(symbolColor)
+                    //                        dateTextField($minuteInput, "23")
+                    //                        Text(":").foregroundColor(symbolColor)
+                    //                        dateTextField($secondInput, "30")
+                    //                    }
+                    //                }
+                    //                .frame(height: 35, alignment: .leading)
                     
-                    Button {
-                        unixInput = Date.now.unix.description
-                        unix2All()
-                    } label: {
-                        Text("Now")
-                            .font(.system(size: 12))
-                            .foregroundColor(.white)
+                    HStack {
+                        textField("1679534610", text: $unixInput)
+                            .focused($focus, equals: .unix)
+                        
+                        Button {
+                            unixInput = Date.now.unix.description
+                            unix2All()
+                        } label: {
+                            Text("Now")
+                                .font(.system(size: 12))
+                                .foregroundColor(.white)
+                        }
+                        .buttonStyle(.plain)
+                        .frame(width: 60, height: 25)
+                        .background(.blue)
+                        .clipShape(RoundedRectangle(cornerRadius: 7))
+                        .shadow(radius: 10)
                     }
-                    .buttonStyle(.plain)
-                    .frame(width: 60, height: 25)
-                    .background(.blue)
-                    .clipShape(RoundedRectangle(cornerRadius: 7))
-                    .shadow(radius: 10)
+                    .frame(width: 219, height: 35)
+                    
+                    
+                    HStack {
+                        textField("2023-03-23 09:23:30 +0800", text: $stringInput)
+                            .focused($focus, equals: .string)
+                    }
+                    .frame(width: 219, height: 35)
+                    
                 }
-                .frame(width: 219, height: 35)
-                
-                
-                HStack {
-                    textField("2023-03-23 09:23:30 +0800", text: $stringInput)
-                        .focused($focus, equals: .string)
-                }
-                .frame(width: 219, height: 35)
-                
-            }
-            .textFieldStyle(.plain)
+                .textFieldStyle(.plain)
         }
-        .onChange(of: yearInput, initial: false) { _, _ in handleDate2All() }
-        .onChange(of: monthInput, initial: false) { _, _ in handleDate2All() }
-        .onChange(of: dayInput, initial: false) { _, _ in handleDate2All() }
-        .onChange(of: hourInput, initial: false) { _, _ in handleDate2All() }
-        .onChange(of: minuteInput, initial: false) { _, _ in handleDate2All() }
-        .onChange(of: secondInput, initial: false) { _, _ in handleDate2All() }
-        .onChange(of: unixInput, initial: false) { _, _ in handleUnix2All() }
-        .onChange(of: stringInput, initial: false) { _, _ in handleString2All() }
-        .onChange(of: timezone, initial: false) { _, _ in unix2All() }
     }
     
     @ViewBuilder
