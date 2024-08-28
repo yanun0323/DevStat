@@ -3,12 +3,12 @@
     <channel>
         <title>DevStat</title>
         <item>
-            <title>1.0.3</title>
-            <pubDate>Wed, 28 Aug 2024 17:30:08 +0800</pubDate>
-            <sparkle:version>D1S3T</sparkle:version>
-            <sparkle:shortVersionString>1.0.3</sparkle:shortVersionString>
+            <title>1.0.5</title>
+            <pubDate>Wed, 28 Aug 2024 17:40:48 +0800</pubDate>
+            <sparkle:version>D1S5T</sparkle:version>
+            <sparkle:shortVersionString>1.0.5</sparkle:shortVersionString>
             <sparkle:minimumSystemVersion>14.0</sparkle:minimumSystemVersion>
-            <enclosure url="https://raw.githubusercontent.com/yanun0323/DevStat/master/DevStat-1.0.3.zip" length="3550962" type="application/octet-stream" sparkle:edSignature="vnJ4k1DBf3rroc9kQGg0CARf0Ua8+R6q42XHFN5488lW4GEAi9yCcp9nJ4tnV6ld+8sjcfeEbmQWJD+sZAZOBA=="/>
+            <enclosure url="https://raw.githubusercontent.com/yanun0323/DevStat/master/DevStat-1.0.5.zip" length="3551104" type="application/octet-stream" sparkle:edSignature="QNtZ9nEfGkuUO66LTDlUVsM7Jbkwfb7AP5xW1QUtsO/8bk20+CUkjgo0lxLTM8Ah5mZIQasvMo6/SUt0gM3iBA=="/>
         </item>
     </channel>
 </rss>
