@@ -21,6 +21,7 @@ struct TimestampView: View {
     // MARK: Date Transfer
     private static let stringInputFormat = "yyyy-MM-dd HH:mm:ss ZZ"
     private static let tempDateFormat: String = "yyyy-MM-dd HH:mm:ss"
+    @State private var timezone: TimeZone = .current
     @State private var stringInput: String = Date.now.string(Self.stringInputFormat)
     @State private var unixInput: String = Date.now.unix.description
     
@@ -32,11 +33,21 @@ struct TimestampView: View {
     @State private var secondInput: String = Date.now.string("ss")
     
     var body: some View {
-        scrollView {
+        VStack {
+            Spacer()
             VStack(spacing: 10) {
-                section("時間轉換工具", font: .body, dateTransfer)
-                Spacer()
+                timezonePicker()
+                dateTransfer()
             }
+            .padding(5)
+            Spacer()
+        }
+        .scrollIndicators(.never)
+        .onAppear {
+            container.inter.system.fetchTimezone()
+        }
+        .onReceive(container.state.timezone) { tz in
+            withAnimation { timezone = tz }
         }
         .hotkey(key: .kVK_Return) {
             handleDate2All()
@@ -55,29 +66,50 @@ struct TimestampView: View {
     }
     
     @ViewBuilder
+    private func timezonePicker() -> some View {
+        HStack {
+            Text("預設時區")
+            Menu {
+                Picker(selection: Binding {
+                    return timezone
+                } set: {
+                    container.inter.system.setTimezone($0)
+                }) {
+                    ForEach(TimeZone.timezones) { tz in
+                        Text("\(Date.now.string("ZZZZ", timezone: tz))")
+                            .tag(tz)
+                    }
+                } label: {}
+                    .pickerStyle(.inline)
+            } label: {
+                Text("\(Date.now.string("ZZZZ", timezone: timezone))")
+            }
+        }
+        .padding(.horizontal, 10)
+    }
+    
+    @ViewBuilder
     private func dateTransfer() -> some View {
         HStack(spacing: 20) {
             VStack(alignment: .leading, spacing: 5) {
-                HStack {
-                    HStack(spacing: 10) {
-                        let symbolColor: Color = .primary.opacity(0.8)
-                        HStack(spacing: 2)  {
-                            dateTextField($yearInput, "2023", digit: 4, max: 9999)
-                            Text("-").foregroundColor(symbolColor)
-                            dateTextField($monthInput, "03", max: 12)
-                            Text("-").foregroundColor(symbolColor)
-                            dateTextField($dayInput, "23", max: 31)
-                        }
-                        HStack(spacing: 2) {
-                            dateTextField($hourInput, "09", max: 24)
-                            Text(":").foregroundColor(symbolColor)
-                            dateTextField($minuteInput, "23")
-                            Text(":").foregroundColor(symbolColor)
-                            dateTextField($secondInput, "30")
-                        }
-                    }
-                }
-                .frame(height: 35, alignment: .leading)
+//                HStack(spacing: 10) {
+//                    let symbolColor: Color = .primary.opacity(0.8)
+//                    HStack(spacing: 2)  {
+//                        dateTextField($yearInput, "2023", digit: 4, max: 9999)
+//                        Text("-").foregroundColor(symbolColor)
+//                        dateTextField($monthInput, "03", max: 12)
+//                        Text("-").foregroundColor(symbolColor)
+//                        dateTextField($dayInput, "23", max: 31)
+//                    }
+//                    HStack(spacing: 2) {
+//                        dateTextField($hourInput, "09", max: 24)
+//                        Text(":").foregroundColor(symbolColor)
+//                        dateTextField($minuteInput, "23")
+//                        Text(":").foregroundColor(symbolColor)
+//                        dateTextField($secondInput, "30")
+//                    }
+//                }
+//                .frame(height: 35, alignment: .leading)
                 
                 HStack {
                     textField("1679534610", text: $unixInput)
@@ -109,14 +141,15 @@ struct TimestampView: View {
             }
             .textFieldStyle(.plain)
         }
-        .onChange(of: yearInput) { _ in handleDate2All() }
-        .onChange(of: monthInput) { _ in handleDate2All() }
-        .onChange(of: dayInput) { _ in handleDate2All() }
-        .onChange(of: hourInput) { _ in handleDate2All() }
-        .onChange(of: minuteInput) { _ in handleDate2All() }
-        .onChange(of: secondInput) { _ in handleDate2All() }
-        .onChange(of: unixInput) { _ in handleUnix2All() }
-        .onChange(of: stringInput) { _ in handleString2All() }
+        .onChange(of: yearInput, initial: false) { _, _ in handleDate2All() }
+        .onChange(of: monthInput, initial: false) { _, _ in handleDate2All() }
+        .onChange(of: dayInput, initial: false) { _, _ in handleDate2All() }
+        .onChange(of: hourInput, initial: false) { _, _ in handleDate2All() }
+        .onChange(of: minuteInput, initial: false) { _, _ in handleDate2All() }
+        .onChange(of: secondInput, initial: false) { _, _ in handleDate2All() }
+        .onChange(of: unixInput, initial: false) { _, _ in handleUnix2All() }
+        .onChange(of: stringInput, initial: false) { _, _ in handleString2All() }
+        .onChange(of: timezone, initial: false) { _, _ in unix2All() }
     }
     
     @ViewBuilder
@@ -165,13 +198,13 @@ extension TimestampView {
     
     func date2All() {
         let temp = "\(yearInput)-\(monthInput)-\(dayInput) \(hourInput):\(minuteInput):\(secondInput)"
-        guard let date = Date(from: temp, Self.tempDateFormat, .us, .current) else {
+        guard let date = Date(from: temp, Self.tempDateFormat, .us, timezone) else {
             unixInput = ""
             stringInput = ""
             return
         }
         unixInput = date.unix.description
-        stringInput = date.string(Self.stringInputFormat, .us)
+        stringInput = date.string(Self.stringInputFormat, timezone: timezone)
     }
     
     func handleString2All() {
@@ -183,7 +216,7 @@ extension TimestampView {
     }
     
     func string2All() {
-        guard let d = Date(from: stringInput, Self.stringInputFormat, .us, .current) else {
+        guard let d = Date(from: stringInput, Self.stringInputFormat, .us, timezone) else {
             unixInput = ""
             yearInput = ""
             monthInput = ""
@@ -195,12 +228,12 @@ extension TimestampView {
         }
         
         unixInput = d.unix.description
-        yearInput = d.string("yyyy")
-        monthInput = d.string("MM")
-        dayInput = d.string("dd")
-        hourInput = d.string("HH")
-        minuteInput = d.string("mm")
-        secondInput = d.string("ss")
+        yearInput = d.string("yyyy", timezone: timezone)
+        monthInput = d.string("MM", timezone: timezone)
+        dayInput = d.string("dd", timezone: timezone)
+        hourInput = d.string("HH", timezone: timezone)
+        minuteInput = d.string("mm", timezone: timezone)
+        secondInput = d.string("ss", timezone: timezone)
     }
     
     func handleUnix2All() {
@@ -223,13 +256,13 @@ extension TimestampView {
             return
         }
         let d = Date.init(timeIntervalSince1970: 0).addingTimeInterval(.init(unix))
-        stringInput = d.string(Self.stringInputFormat)
-        yearInput = d.string("yyyy")
-        monthInput = d.string("MM")
-        dayInput = d.string("dd")
-        hourInput = d.string("HH")
-        minuteInput = d.string("mm")
-        secondInput = d.string("ss")
+        stringInput = d.string(Self.stringInputFormat, timezone: timezone)
+        yearInput = d.string("yyyy", timezone: timezone)
+        monthInput = d.string("MM", timezone: timezone)
+        dayInput = d.string("dd", timezone: timezone)
+        hourInput = d.string("HH", timezone: timezone)
+        minuteInput = d.string("mm", timezone: timezone)
+        secondInput = d.string("ss", timezone: timezone)
     }
 }
 
@@ -239,5 +272,6 @@ extension TimestampView {
     TimestampView()
         .padding()
         .inject(.inMemory)
+        .frame(width: 250, height: 250)
 }
 #endif

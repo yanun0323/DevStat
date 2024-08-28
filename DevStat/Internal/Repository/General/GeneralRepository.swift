@@ -6,11 +6,11 @@ struct Dao: BasicDao, BasicRepository  {
 
     init(inMemory: Bool) {
         self.db = Sworm.setup(mock: inMemory)
-        db.migrate(Log.self)
+        db.migrate(Log.self, Setting.self)
     }
 }
 
-struct GeneralRepository: Repository {
+struct GeneralRepository: BasicDao, Repository {
     private let dao: Dao
     var system: SystemRepository
     

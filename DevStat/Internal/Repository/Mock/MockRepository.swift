@@ -1,6 +1,7 @@
 import SwiftUI
+import Sworm
 
-struct MockRepository: Repository {
+struct MockRepository: BasicDao, Repository {
     var system: SystemRepository
     
     init() {

@@ -1,0 +1,14 @@
+<?xml version="1.0" standalone="yes"?>
+<rss xmlns:sparkle="http://www.andymatuschak.org/xml-namespaces/sparkle" version="2.0">
+    <channel>
+        <title>DevStat</title>
+        <item>
+            <title>1.0.2</title>
+            <pubDate>Wed, 28 Aug 2024 17:25:35 +0800</pubDate>
+            <sparkle:version>1</sparkle:version>
+            <sparkle:shortVersionString>1.0.2</sparkle:shortVersionString>
+            <sparkle:minimumSystemVersion>14.0</sparkle:minimumSystemVersion>
+            <enclosure url="https://raw.githubusercontent.com/yanun0323/DevStat/master/DevStat-1.0.2.zip" length="3550944" type="application/octet-stream" sparkle:edSignature="kGGmGNQW14qmUVm0ljCR4fPOEBoWW2ClvPdlLMPR7XebPN4E5UcsKwM4zqYNFiyRnUth4FbpuVzkSH4V7QfpBQ=="/>
+        </item>
+    </channel>
+</rss>

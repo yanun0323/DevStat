@@ -6,4 +6,6 @@ protocol Interactor {
 
 protocol SystemInteractor {
     func sendError(_ err: Error)
+    func fetchTimezone()
+    func setTimezone(_ timezone: TimeZone)
 }

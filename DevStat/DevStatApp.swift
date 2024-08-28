@@ -5,6 +5,7 @@
 //  Created by yanun.y on 2024/8/14.
 //
 import SwiftUI
+import Sparkle
 
 @main
 struct DevStatApp: App {
@@ -32,7 +33,7 @@ class AppDelegate: NSObject, NSApplicationDelegate, ObservableObject {
 //        container.interactor.system.pushSecret(sec)
         
         popOver.setValue(true, forKeyPath: "shouldHideAnchor")
-        popOver.contentSize = CGSize(width: 250, height: 250)
+        popOver.contentSize = CGSize(width: 250, height: 200)
         popOver.behavior = .transient
         popOver.animates = true
         popOver.contentViewController = NSViewController()

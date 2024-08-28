@@ -7,4 +7,5 @@ typealias Channel<T> = PassthroughSubject<T, Never>
 
 protocol AppState {
     var error: AnyProducer<Error> { get }
+    var timezone: AnyProducer<TimeZone> { get }
 }

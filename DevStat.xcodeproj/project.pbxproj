@@ -37,6 +37,12 @@
 		CE1E38282C6C74B4009B0C80 /* View.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE1E38272C6C74B4009B0C80 /* View.swift */; };
 		CE1E382D2C6C7584009B0C80 /* Color.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE1E382C2C6C7584009B0C80 /* Color.swift */; };
 		CE1E382F2C6C7608009B0C80 /* CGFloat.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE1E382E2C6C7608009B0C80 /* CGFloat.swift */; };
+		CE4FC7332C744FF400888A98 /* Timezone.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE4FC7322C744FF400888A98 /* Timezone.swift */; };
+		CE4FC7352C7470BC00888A98 /* Setting.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE4FC7342C7470BC00888A98 /* Setting.swift */; };
+		CE4FC7372C7478B700888A98 /* Errors.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE4FC7362C7478B700888A98 /* Errors.swift */; };
+		CE7177AB2C78304E00AC98C7 /* InfoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE7177AA2C78304E00AC98C7 /* InfoView.swift */; };
+		CEFBF4EE2C7F1886001E38DF /* Sparkle in Frameworks */ = {isa = PBXBuildFile; productRef = CEFBF4ED2C7F1886001E38DF /* Sparkle */; };
+		CEFBF4F02C7F18A3001E38DF /* UpdaterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEFBF4EF2C7F18A3001E38DF /* UpdaterView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -70,6 +76,13 @@
 		CE1E38272C6C74B4009B0C80 /* View.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = View.swift; sourceTree = "<group>"; };
 		CE1E382C2C6C7584009B0C80 /* Color.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Color.swift; sourceTree = "<group>"; };
 		CE1E382E2C6C7608009B0C80 /* CGFloat.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CGFloat.swift; sourceTree = "<group>"; };
+		CE4FC7322C744FF400888A98 /* Timezone.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Timezone.swift; sourceTree = "<group>"; };
+		CE4FC7342C7470BC00888A98 /* Setting.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Setting.swift; sourceTree = "<group>"; };
+		CE4FC7362C7478B700888A98 /* Errors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Errors.swift; sourceTree = "<group>"; };
+		CE7177AA2C78304E00AC98C7 /* InfoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InfoView.swift; sourceTree = "<group>"; };
+		CEFBF4EF2C7F18A3001E38DF /* UpdaterView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UpdaterView.swift; sourceTree = "<group>"; };
+		CEFBF4F12C7F1B4D001E38DF /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
+		CEFBF4F22C7F1D4E001E38DF /* DevStat.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = DevStat.entitlements; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -78,6 +91,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				CE1E38222C6C726A009B0C80 /* Sworm in Frameworks */,
+				CEFBF4EE2C7F1886001E38DF /* Sparkle in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -103,6 +117,8 @@
 		CE1E37D72C6C720D009B0C80 /* DevStat */ = {
 			isa = PBXGroup;
 			children = (
+				CEFBF4F22C7F1D4E001E38DF /* DevStat.entitlements */,
+				CEFBF4F12C7F1B4D001E38DF /* Info.plist */,
 				CE1E37D82C6C720D009B0C80 /* DevStatApp.swift */,
 				CE1E37DA2C6C720D009B0C80 /* UI */,
 				CE1E37DD2C6C720D009B0C80 /* Internal */,
@@ -117,6 +133,8 @@
 			children = (
 				CE1E37DB2C6C720D009B0C80 /* ContentView.swift */,
 				CE1E38232C6C727A009B0C80 /* TimestampView.swift */,
+				CE7177AA2C78304E00AC98C7 /* InfoView.swift */,
+				CEFBF4EF2C7F18A3001E38DF /* UpdaterView.swift */,
 			);
 			path = UI;
 			sourceTree = "<group>";
@@ -149,6 +167,8 @@
 			isa = PBXGroup;
 			children = (
 				CE1E37E42C6C720D009B0C80 /* Log.swift */,
+				CE4FC7362C7478B700888A98 /* Errors.swift */,
+				CE4FC7342C7470BC00888A98 /* Setting.swift */,
 			);
 			path = Entity;
 			sourceTree = "<group>";
@@ -258,6 +278,7 @@
 				CE1E38102C6C720D009B0C80 /* Date.swift */,
 				CE1E382C2C6C7584009B0C80 /* Color.swift */,
 				CE1E38252C6C73C9009B0C80 /* Locale.swift */,
+				CE4FC7322C744FF400888A98 /* Timezone.swift */,
 				CE1E38272C6C74B4009B0C80 /* View.swift */,
 				CE1E382E2C6C7608009B0C80 /* CGFloat.swift */,
 			);
@@ -306,6 +327,7 @@
 			name = DevStat;
 			packageProductDependencies = (
 				CE1E38212C6C726A009B0C80 /* Sworm */,
+				CEFBF4ED2C7F1886001E38DF /* Sparkle */,
 			);
 			productName = DevStat;
 			productReference = CE1E37D52C6C720D009B0C80 /* DevStat.app */;
@@ -337,6 +359,7 @@
 			mainGroup = CE1E37CC2C6C720D009B0C80;
 			packageReferences = (
 				CE1E38202C6C726A009B0C80 /* XCRemoteSwiftPackageReference "Sworm" */,
+				CEFBF4EC2C7F1886001E38DF /* XCRemoteSwiftPackageReference "Sparkle" */,
 			);
 			productRefGroup = CE1E37D62C6C720D009B0C80 /* Products */;
 			projectDirPath = "";
@@ -368,6 +391,8 @@
 				CE1E37DC2C6C720D009B0C80 /* ContentView.swift in Sources */,
 				CE1E38002C6C720D009B0C80 /* MockSystemInteractor.swift in Sources */,
 				CE1E37F52C6C720D009B0C80 /* MockAppState.swift in Sources */,
+				CE7177AB2C78304E00AC98C7 /* InfoView.swift in Sources */,
+				CE4FC7332C744FF400888A98 /* Timezone.swift in Sources */,
 				CE1E380E2C6C720D009B0C80 /* MockSystemRepository.swift in Sources */,
 				CE1E38112C6C720D009B0C80 /* Date.swift in Sources */,
 				CE1E37E22C6C720D009B0C80 /* ContainerEnvironment.swift in Sources */,
@@ -388,8 +413,11 @@
 				CE1E37EA2C6C720D009B0C80 /* Interactor.swift in Sources */,
 				CE1E37D92C6C720D009B0C80 /* DevStatApp.swift in Sources */,
 				CE1E38072C6C720D009B0C80 /* GeneralRepository.swift in Sources */,
+				CE4FC7352C7470BC00888A98 /* Setting.swift in Sources */,
 				CE1E38282C6C74B4009B0C80 /* View.swift in Sources */,
+				CEFBF4F02C7F18A3001E38DF /* UpdaterView.swift in Sources */,
 				CE1E37F92C6C720D009B0C80 /* GeneralInteractor.swift in Sources */,
+				CE4FC7372C7478B700888A98 /* Errors.swift in Sources */,
 				CE1E38262C6C73C9009B0C80 /* Locale.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -516,6 +544,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = DevStat/DevStat.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "";
@@ -523,8 +552,14 @@
 				ENABLE_HARDENED_RUNTIME = YES;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = DevStat/Info.plist;
+				INFOPLIST_KEY_LSUIElement = YES;
+				"LD_RUNPATH_SEARCH_PATHS[arch=*]" = (
+					"$(LD_RUNPATH_SEARCH_PATHS_$(IS_MACCATALYST))",
+					"@loader_path/../Frameworks",
+				);
 				MACOSX_DEPLOYMENT_TARGET = 14.0;
-				MARKETING_VERSION = 1.0;
+				MARKETING_VERSION = 1.0.2;
 				PRODUCT_BUNDLE_IDENTIFIER = yanunyang.com.DevStat;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
@@ -537,6 +572,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = DevStat/DevStat.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "";
@@ -544,8 +580,14 @@
 				ENABLE_HARDENED_RUNTIME = YES;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = DevStat/Info.plist;
+				INFOPLIST_KEY_LSUIElement = YES;
+				"LD_RUNPATH_SEARCH_PATHS[arch=*]" = (
+					"$(LD_RUNPATH_SEARCH_PATHS_$(IS_MACCATALYST))",
+					"@loader_path/../Frameworks",
+				);
 				MACOSX_DEPLOYMENT_TARGET = 14.0;
-				MARKETING_VERSION = 1.0;
+				MARKETING_VERSION = 1.0.2;
 				PRODUCT_BUNDLE_IDENTIFIER = yanunyang.com.DevStat;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
@@ -585,6 +627,14 @@
 				minimumVersion = 0.10.0;
 			};
 		};
+		CEFBF4EC2C7F1886001E38DF /* XCRemoteSwiftPackageReference "Sparkle" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/sparkle-project/Sparkle.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 2.6.4;
+			};
+		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
@@ -592,6 +642,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = CE1E38202C6C726A009B0C80 /* XCRemoteSwiftPackageReference "Sworm" */;
 			productName = Sworm;
+		};
+		CEFBF4ED2C7F1886001E38DF /* Sparkle */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = CEFBF4EC2C7F1886001E38DF /* XCRemoteSwiftPackageReference "Sparkle" */;
+			productName = Sparkle;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};

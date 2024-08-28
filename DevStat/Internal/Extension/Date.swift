@@ -20,11 +20,11 @@ extension Date {
     /** Return the second for 1970-01-01 00:00:00 UTC */
     public var unix: Int { Int(self.timeIntervalSince1970) }
     
-    public func string(_ layout: DateFormatLayout = .Default, _ locale: Locale = .autoupdatingCurrent) -> String {
+    public func string(_ layout: DateFormatLayout = .Default, _ locale: Locale = .autoupdatingCurrent, timezone: TimeZone? = nil) -> String {
         let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = layout
         dateFormatter.locale = locale
-        dateFormatter.timeZone = locale.timeZone
+        dateFormatter.timeZone = timezone ?? locale.timeZone
         return dateFormatter.string(from: self)
     }
 }
