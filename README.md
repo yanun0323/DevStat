@@ -1,6 +1,6 @@
 # DevStat
 
-DevStat is a simple menubar tool to translate time format for MacOS.  
+DevStat is a simple MacOS menubar tool to transform time format.  
 
 ## Screenshot
 
