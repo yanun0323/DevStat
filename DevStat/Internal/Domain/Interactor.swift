@@ -8,4 +8,6 @@ protocol SystemInteractor {
     func sendError(_ err: Error)
     func fetchTimezone()
     func setTimezone(_ timezone: TimeZone)
+    func fetchTimeDigit()
+    func setTimeDigit(_ timeDigit: TimeDigit)
 }

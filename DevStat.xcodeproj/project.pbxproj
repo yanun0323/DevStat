@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		A8FB10662CDA2380005A78CB /* TimeDigit.swift in Sources */ = {isa = PBXBuildFile; fileRef = A8FB10652CDA2380005A78CB /* TimeDigit.swift */; };
 		CE1E37D92C6C720D009B0C80 /* DevStatApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE1E37D82C6C720D009B0C80 /* DevStatApp.swift */; };
 		CE1E37DC2C6C720D009B0C80 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE1E37DB2C6C720D009B0C80 /* ContentView.swift */; };
 		CE1E37E02C6C720D009B0C80 /* Container.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE1E37DF2C6C720D009B0C80 /* Container.swift */; };
@@ -46,6 +47,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		A8FB10652CDA2380005A78CB /* TimeDigit.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimeDigit.swift; sourceTree = "<group>"; };
 		CE1E37D52C6C720D009B0C80 /* DevStat.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = DevStat.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		CE1E37D82C6C720D009B0C80 /* DevStatApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DevStatApp.swift; sourceTree = "<group>"; };
 		CE1E37DB2C6C720D009B0C80 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -167,6 +169,7 @@
 			isa = PBXGroup;
 			children = (
 				CE1E37E42C6C720D009B0C80 /* Log.swift */,
+				A8FB10652CDA2380005A78CB /* TimeDigit.swift */,
 				CE4FC7362C7478B700888A98 /* Errors.swift */,
 				CE4FC7342C7470BC00888A98 /* Setting.swift */,
 			);
@@ -392,6 +395,7 @@
 				CE1E38002C6C720D009B0C80 /* MockSystemInteractor.swift in Sources */,
 				CE1E37F52C6C720D009B0C80 /* MockAppState.swift in Sources */,
 				CE7177AB2C78304E00AC98C7 /* InfoView.swift in Sources */,
+				A8FB10662CDA2380005A78CB /* TimeDigit.swift in Sources */,
 				CE4FC7332C744FF400888A98 /* Timezone.swift in Sources */,
 				CE1E380E2C6C720D009B0C80 /* MockSystemRepository.swift in Sources */,
 				CE1E38112C6C720D009B0C80 /* Date.swift in Sources */,
@@ -546,7 +550,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = DevStat/DevStat.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = D1S7T;
+				CURRENT_PROJECT_VERSION = D1S8V;
 				DEVELOPMENT_ASSET_PATHS = "";
 				DEVELOPMENT_TEAM = Y366CJ66L6;
 				ENABLE_HARDENED_RUNTIME = YES;
@@ -559,7 +563,7 @@
 					"@loader_path/../Frameworks",
 				);
 				MACOSX_DEPLOYMENT_TARGET = 13.0;
-				MARKETING_VERSION = 1.0.7;
+				MARKETING_VERSION = 1.0.8;
 				PRODUCT_BUNDLE_IDENTIFIER = yanunyang.com.DevStat;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
@@ -574,7 +578,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = DevStat/DevStat.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = D1S7T;
+				CURRENT_PROJECT_VERSION = D1S8V;
 				DEVELOPMENT_ASSET_PATHS = "";
 				DEVELOPMENT_TEAM = Y366CJ66L6;
 				ENABLE_HARDENED_RUNTIME = YES;
@@ -587,7 +591,7 @@
 					"@loader_path/../Frameworks",
 				);
 				MACOSX_DEPLOYMENT_TARGET = 13.0;
-				MARKETING_VERSION = 1.0.7;
+				MARKETING_VERSION = 1.0.8;
 				PRODUCT_BUNDLE_IDENTIFIER = yanunyang.com.DevStat;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;

@@ -8,6 +8,7 @@ extension TimeZone {
         TimeZone.knownTimeZoneIdentifiers.map({ TimeZone(identifier: $0) }).forEach { tz in
             guard let tz = tz else { return }
             let key = Date.now.string("ZZ", timezone: tz)
+            print("\(tz.identifier) - \(key)")
             if map[key] != nil { return }
             map[key] = tz
             result.append(tz)

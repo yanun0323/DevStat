@@ -22,21 +22,19 @@ struct TimestampView: View {
     private static let stringInputFormat = "yyyy-MM-dd HH:mm:ss ZZ"
     private static let tempDateFormat: String = "yyyy-MM-dd HH:mm:ss"
     @State private var timezone: TimeZone = .current
+    @State private var timeDigit: TimeDigit = .second
     @State private var stringInput: String = Date.now.string(Self.stringInputFormat)
-    @State private var unixInput: String = Date.now.unix.description
+    @State private var unixInput: String = Date.now.unixString(.second, "")
     
-    @State private var yearInput: String = Date.now.string("yyyy")
-    @State private var monthInput: String = Date.now.string("MM")
-    @State private var dayInput: String = Date.now.string("dd")
-    @State private var hourInput: String = Date.now.string("HH")
-    @State private var minuteInput: String = Date.now.string("mm")
-    @State private var secondInput: String = Date.now.string("ss")
+    @State private var milli = Date.now.unixMilli
+    @State private var timezoneTag = Date.now.string("ZZZZ")
     
     var body: some View {
         VStack {
             Spacer()
             VStack(spacing: 10) {
                 timezonePicker()
+                timeDigitPicker()
                 dateTransfer()
             }
             .padding(5)
@@ -45,37 +43,30 @@ struct TimestampView: View {
             
             if #available(macOS 14.0, *) {
                 EmptyView()
-                    .onChange(of: yearInput, initial: false) { _, _ in handleDate2All() }
-                    .onChange(of: monthInput, initial: false) { _, _ in handleDate2All() }
-                    .onChange(of: dayInput, initial: false) { _, _ in handleDate2All() }
-                    .onChange(of: hourInput, initial: false) { _, _ in handleDate2All() }
-                    .onChange(of: minuteInput, initial: false) { _, _ in handleDate2All() }
-                    .onChange(of: secondInput, initial: false) { _, _ in handleDate2All() }
                     .onChange(of: unixInput, initial: false) { _, _ in handleUnix2All() }
                     .onChange(of: stringInput, initial: false) { _, _ in handleString2All() }
-                    .onChange(of: timezone, initial: false) { _, _ in unix2All() }
+                    .onChange(of: timeDigit, initial: false) { _, _ in refreshTime() }
+                    .onChange(of: timezone, initial: false) { _, _ in refreshTimezone() }
             } else {
                 EmptyView()
-                    .onChange(of: yearInput) { _ in handleDate2All() }
-                    .onChange(of: monthInput) { _ in handleDate2All() }
-                    .onChange(of: dayInput) { _ in handleDate2All() }
-                    .onChange(of: hourInput) { _ in handleDate2All() }
-                    .onChange(of: minuteInput) { _ in handleDate2All() }
-                    .onChange(of: secondInput) { _ in handleDate2All() }
                     .onChange(of: unixInput) { _ in handleUnix2All() }
                     .onChange(of: stringInput) { _ in handleString2All() }
-                    .onChange(of: timezone) { _ in unix2All() }
+                    .onChange(of: timeDigit) { _ in refreshTime() }
+                    .onChange(of: timezone) { _ in refreshTimezone() }
             }
         }
         .scrollIndicators(.never)
         .onAppear {
             container.inter.system.fetchTimezone()
+            container.inter.system.fetchTimeDigit()
         }
         .onReceive(container.state.timezone) { tz in
             withAnimation { timezone = tz }
         }
+        .onReceive(container.state.timeDigit) { td in
+            withAnimation { timeDigit = td }
+        }
         .hotkey(key: .kVK_Return) {
-            handleDate2All()
             handleUnix2All()
             handleString2All()
         }
@@ -93,7 +84,36 @@ struct TimestampView: View {
     @ViewBuilder
     private func timezonePicker() -> some View {
         HStack {
-            Text("預設時區")
+//            Text("時區")
+            
+            Button {
+                container.inter.system.setTimezone(.current)
+            } label: {
+                Text("Current")
+                    .font(.system(size: 12))
+                    .foregroundColor(.white)
+            }
+            .buttonStyle(.plain)
+            .frame(width: 60, height: 20)
+            .background(.blue)
+            .clipShape(RoundedRectangle(cornerRadius: 7))
+            .shadow(radius: 10)
+            .disabled(isCurrentTimezone(.current))
+            
+            Button {
+                container.inter.system.setTimezone(.UTC)
+            } label: {
+                Text("UTC")
+                    .font(.system(size: 12))
+                    .foregroundColor(.white)
+            }
+            .buttonStyle(.plain)
+            .frame(width: 40, height: 20)
+            .background(.blue)
+            .clipShape(RoundedRectangle(cornerRadius: 7))
+            .shadow(radius: 10)
+            .disabled(isCurrentTimezone(.UTC))
+            
             Menu {
                 Picker(selection: Binding {
                     return timezone
@@ -101,48 +121,52 @@ struct TimestampView: View {
                     container.inter.system.setTimezone($0)
                 }) {
                     ForEach(TimeZone.timezones) { tz in
-                        Text("\(Date.now.string("ZZZZ", timezone: tz))")
+                        Text(Date.now.string("ZZZZ", timezone: tz))
                             .tag(tz)
                     }
                 } label: {}
                     .pickerStyle(.inline)
             } label: {
-                Text("\(Date.now.string("ZZZZ", timezone: timezone))")
+                Text(timezoneTag)
             }
         }
         .padding(.horizontal, 10)
     }
     
     @ViewBuilder
+    private func timeDigitPicker() -> some View {
+        HStack {
+            Text("時間單位")
+            Menu {
+                Picker(selection: Binding {
+                    return timeDigit
+                } set: {
+                    container.inter.system.setTimeDigit($0)
+                }) {
+                    ForEach(TimeDigit.allCases) { td in
+                        Text(td.rawValue)
+                            .tag(td)
+                    }
+                } label: {}
+                    .pickerStyle(.inline)
+            } label: {
+                Text(timeDigit.rawValue)
+            }
+        }
+        .padding(.horizontal, 10)
+        
+    }
+    
+    @ViewBuilder
     private func dateTransfer() -> some View {
         HStack(spacing: 20) {
                 VStack(alignment: .leading, spacing: 5) {
-                    //                HStack(spacing: 10) {
-                    //                    let symbolColor: Color = .primary.opacity(0.8)
-                    //                    HStack(spacing: 2)  {
-                    //                        dateTextField($yearInput, "2023", digit: 4, max: 9999)
-                    //                        Text("-").foregroundColor(symbolColor)
-                    //                        dateTextField($monthInput, "03", max: 12)
-                    //                        Text("-").foregroundColor(symbolColor)
-                    //                        dateTextField($dayInput, "23", max: 31)
-                    //                    }
-                    //                    HStack(spacing: 2) {
-                    //                        dateTextField($hourInput, "09", max: 24)
-                    //                        Text(":").foregroundColor(symbolColor)
-                    //                        dateTextField($minuteInput, "23")
-                    //                        Text(":").foregroundColor(symbolColor)
-                    //                        dateTextField($secondInput, "30")
-                    //                    }
-                    //                }
-                    //                .frame(height: 35, alignment: .leading)
-                    
                     HStack {
                         textField("1679534610", text: $unixInput)
                             .focused($focus, equals: .unix)
                         
                         Button {
-                            unixInput = Date.now.unix.description
-                            unix2All()
+                            refreshTime()
                         } label: {
                             Text("Now")
                                 .font(.system(size: 12))
@@ -166,16 +190,6 @@ struct TimestampView: View {
                 }
                 .textFieldStyle(.plain)
         }
-    }
-    
-    @ViewBuilder
-    private func dateTextField(_ text: Binding<String>, _ title: String, digit: Int = 2, max: Int = 60) -> some View {
-        TextField(title, text: limitation(text, limit: digit, max: max))
-            .focused($focus, equals: .date)
-            .frame(width: CGFloat(digit*8), height: textFieldHeight, alignment: .center)
-            .padding(.horizontal, 5)
-            .background(Color.background2, ignoresSafeAreaEdges: [])
-            .cornerRadius(7)
     }
 }
 
@@ -204,81 +218,94 @@ extension TimestampView {
 
     }
     
-    func handleDate2All() {
-        if focus != .date { return }
-        #if DEBUG
-        print("date invoke - \(Date.now.unix)")
-        #endif
-        date2All()
+    func refreshTime() {
+        milli = Date.now.unixMilli
+        milliToAll()
     }
     
-    func date2All() {
-        let temp = "\(yearInput)-\(monthInput)-\(dayInput) \(hourInput):\(minuteInput):\(secondInput)"
-        guard let date = Date(from: temp, Self.tempDateFormat, .us, timezone) else {
-            unixInput = ""
-            stringInput = ""
-            return
-        }
-        unixInput = date.unix.description
-        stringInput = date.string(Self.stringInputFormat, timezone: timezone)
+    func milliToAll() {
+        let d = Date(milli, .millisecond)
+        unixInput = d.unixString(timeDigit, unixInput)
+        stringInput = d.string(Self.stringInputFormat, timezone: timezone)
+    }
+    
+    func refreshTimezone() {
+        timezoneTag = Date.now.string("ZZZZ", timezone: timezone)
+        unix2All(force: true)
+        
     }
     
     func handleString2All() {
         if focus != .string { return }
-        #if DEBUG
-        print("string invoke - \(Date.now.unix)")
-        #endif
         string2All()
     }
     
     func string2All() {
-        guard let d = Date(from: stringInput, Self.stringInputFormat, .us, timezone) else {
-            unixInput = ""
-            yearInput = ""
-            monthInput = ""
-            dayInput = ""
-            hourInput = ""
-            minuteInput = ""
-            secondInput = ""
+        if stringInput.isEmpty {
             return
         }
         
-        unixInput = d.unix.description
-        yearInput = d.string("yyyy", timezone: timezone)
-        monthInput = d.string("MM", timezone: timezone)
-        dayInput = d.string("dd", timezone: timezone)
-        hourInput = d.string("HH", timezone: timezone)
-        minuteInput = d.string("mm", timezone: timezone)
-        secondInput = d.string("ss", timezone: timezone)
+        guard let d = Date(from: stringInput, Self.stringInputFormat, .us, timezone) else {
+            unixInput = ""
+            return
+        }
+        
+        if d.unix == milli.milliToSecond(.millisecond) {
+            return
+        }
+        
+        milli = d.unixMilli
+        unixInput = d.unixString(timeDigit, unixInput)
     }
     
     func handleUnix2All() {
         if focus != .unix { return }
-        #if DEBUG
-        print("unix invoke - \(Date.now.unix)")
-        #endif
         unix2All()
     }
     
-    func unix2All() {
-        guard let unix = Int(unixInput) else {
-            yearInput = ""
-            monthInput = ""
-            dayInput = ""
-            hourInput = ""
-            minuteInput = ""
-            secondInput = ""
+    func unix2All(force: Bool = false) {
+        if  unixInput.isEmpty {
+            return
+        }
+        
+        guard let unix = Int64(unixInput) else {
             stringInput = ""
             return
         }
-        let d = Date.init(timeIntervalSince1970: 0).addingTimeInterval(.init(unix))
+        
+        if !force && unix == milli {
+            return
+        }
+        
+        let d = Date(unix, timeDigit)
+        milli = d.unixMilli
         stringInput = d.string(Self.stringInputFormat, timezone: timezone)
-        yearInput = d.string("yyyy", timezone: timezone)
-        monthInput = d.string("MM", timezone: timezone)
-        dayInput = d.string("dd", timezone: timezone)
-        hourInput = d.string("HH", timezone: timezone)
-        minuteInput = d.string("mm", timezone: timezone)
-        secondInput = d.string("ss", timezone: timezone)
+    }
+    
+    func isCurrentTimezone(_ target: TimeZone) -> Bool {
+        let d = Date()
+        return d.string("ZZZZ", timezone: target)  == d.string("ZZZZ", timezone: timezone)
+    }
+}
+
+fileprivate extension TimeZone {
+    static let UTC: TimeZone = TimeZone(identifier: "Europe/Dublin")!
+}
+
+fileprivate extension Date {
+    init(_ unix: Int64, _ d: TimeDigit) {
+        self = .init(timeIntervalSince1970: unix.timeInterval(d))
+    }
+    
+    func unixString(_ d: TimeDigit, _ origin: String) -> String {
+        switch d {
+            case .second:
+                return self.unix.description
+            case .millisecond:
+                return self.unixMilli.description
+            case .autoDetect:
+                return origin.count >= 13 ? self.unixMilli.description : self.unix.description
+        }
     }
 }
 

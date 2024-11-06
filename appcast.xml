@@ -3,23 +3,12 @@
     <channel>
         <title>DevStat</title>
         <item>
-            <title>1.0.7</title>
-            <pubDate>Wed, 28 Aug 2024 17:56:03 +0800</pubDate>
-            <sparkle:version>D1S7T</sparkle:version>
-            <sparkle:shortVersionString>1.0.7</sparkle:shortVersionString>
+            <title>1.0.8</title>
+            <pubDate>Wed, 06 Nov 2024 15:55:12 +0800</pubDate>
+            <sparkle:version>D1S8V</sparkle:version>
+            <sparkle:shortVersionString>1.0.8</sparkle:shortVersionString>
             <sparkle:minimumSystemVersion>13.0</sparkle:minimumSystemVersion>
-            <enclosure url="https://raw.githubusercontent.com/yanun0323/DevStat/master/DevStat-1.0.7.zip" length="3554583" type="application/octet-stream" sparkle:edSignature="ii4ZVeRD7nBCE+NuaaNjxneF5xS5+HAH8+EK4o6KGM5BjGmarvEnM1LwP3b6hZk2VLVZr4H8Z2138c/dVrhsDw=="/>
-            <sparkle:deltas>
-                <enclosure url="https://raw.githubusercontent.com/yanun0323/DevStat/master/DevStatD1S7T-D1S6T.delta" sparkle:deltaFrom="D1S6T" length="12106" type="application/octet-stream" sparkle:deltaFromSparkleExecutableSize="863040" sparkle:deltaFromSparkleLocales="de,he,ar,el,ja,fa,en" sparkle:edSignature="4O3A1SxnlQ80e8iQzGBkOJGp05Jc1TPIco57rRFuL5EikVmsI1avXxFjoJ5OC2Jq5qXb7XvNVCfQmjJRTqM1DA=="/>
-            </sparkle:deltas>
-        </item>
-        <item>
-            <title>1.0.6</title>
-            <pubDate>Wed, 28 Aug 2024 17:56:22 +0800</pubDate>
-            <sparkle:version>D1S6T</sparkle:version>
-            <sparkle:shortVersionString>1.0.6</sparkle:shortVersionString>
-            <sparkle:minimumSystemVersion>13.0</sparkle:minimumSystemVersion>
-            <enclosure url="https://raw.githubusercontent.com/yanun0323/DevStat/master/DevStat-1.0.6.zip" length="3554575" type="application/octet-stream" sparkle:edSignature="lUM8llEaIqGcFd8SI07WnikJnuM32dFyNIFi1kdJLTS9R+HSYrbWxev9zm+hSxdL4u6J2SZQtzN8CvuSiQKfAA=="/>
+            <enclosure url="https://raw.githubusercontent.com/yanun0323/DevStat/master/DevStat-1.0.8.zip" length="3566863" type="application/octet-stream" sparkle:edSignature="z9pBOU1zuT3j0wMPj5OexiReunkUzTTKsn2Ti7i6CbUsvYkNicHvz2UYPEUkafB+PQDGtv+2xSSbB6ywWetWCg=="/>
         </item>
     </channel>
 </rss>
