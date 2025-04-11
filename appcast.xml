@@ -3,6 +3,17 @@
     <channel>
         <title>DevStat</title>
         <item>
+            <title>1.0.9</title>
+            <pubDate>Fri, 11 Apr 2025 16:15:38 +0800</pubDate>
+            <sparkle:version>D1S9V</sparkle:version>
+            <sparkle:shortVersionString>1.0.9</sparkle:shortVersionString>
+            <sparkle:minimumSystemVersion>13.0</sparkle:minimumSystemVersion>
+            <enclosure url="https://raw.githubusercontent.com/yanun0323/DevStat/master/DevStat-1.0.9.zip" length="3550211" type="application/octet-stream" sparkle:edSignature="mK80/BCKFSwP+WfFlmj/4H9jnOTzmVpdqH7LWETHirf9wLVzETNR8hKhYbgnVoOjZgVUfr/Ji4/ZVxOx8kGOCg=="/>
+            <sparkle:deltas>
+                <enclosure url="https://raw.githubusercontent.com/yanun0323/DevStat/master/DevStatD1S9V-D1S8V.delta" sparkle:deltaFrom="D1S8V" length="325646" type="application/octet-stream" sparkle:deltaFromSparkleExecutableSize="865040" sparkle:deltaFromSparkleLocales="de,he,ar,el,ja,fa,en" sparkle:edSignature="Am0im99TR4QPeHa+zGE6Il17x9SPj7iw7u9qVqmo0Yj+w/8y5A5RAxA1HA6DMyp+/F+LB+rsj0NIUn5VDj8OAQ=="/>
+            </sparkle:deltas>
+        </item>
+        <item>
             <title>1.0.8</title>
             <pubDate>Wed, 06 Nov 2024 15:55:12 +0800</pubDate>
             <sparkle:version>D1S8V</sparkle:version>
