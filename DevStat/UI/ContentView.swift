@@ -11,8 +11,9 @@ struct ContentView: View {
         VStack {
             HStack(spacing: 6) {
                 HStack(alignment: .bottom, spacing: 5) {
-                    Text("時間轉換工具")
+                    Text("DevStat")
                         .font(.system(size: 14))
+                        .kerning(1)
                         .opacity(0.8)
                     
                     Text(version)

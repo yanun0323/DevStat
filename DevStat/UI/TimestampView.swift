@@ -34,7 +34,7 @@ struct TimestampView: View {
             Spacer()
             VStack(spacing: 10) {
                 timezonePicker()
-                timeDigitPicker()
+                timeUnitsPicker()
                 dateTransfer()
             }
             .padding(5)
@@ -84,8 +84,6 @@ struct TimestampView: View {
     @ViewBuilder
     private func timezonePicker() -> some View {
         HStack {
-//            Text("時區")
-            
             Button {
                 container.inter.system.setTimezone(.current)
             } label: {
@@ -122,6 +120,7 @@ struct TimestampView: View {
                 }) {
                     ForEach(TimeZone.timezones) { tz in
                         Text(Date.now.string("ZZZZ", timezone: tz))
+                            .monospacedDigit()
                             .tag(tz)
                     }
                 } label: {}
@@ -134,9 +133,18 @@ struct TimestampView: View {
     }
     
     @ViewBuilder
-    private func timeDigitPicker() -> some View {
+    private func timeUnitsPicker() -> some View {
         HStack {
-            Text("時間單位")
+            Text("Time Units")
+            if timeDigit == .autoDetect {
+                Text(unixInput.count >= 13 ? "Millisecond" : "Second")
+                    .font(.caption)
+                    .padding(.vertical, 3)
+                    .padding(.horizontal, 5)
+                    .frame(width: 70)
+                    .background(Color.background)
+                    .clipShape(RoundedRectangle(cornerRadius: 5))
+            }
             Menu {
                 Picker(selection: Binding {
                     return timeDigit
@@ -150,7 +158,7 @@ struct TimestampView: View {
                 } label: {}
                     .pickerStyle(.inline)
             } label: {
-                Text(timeDigit.rawValue)
+                Text(timeDigit.string)
             }
         }
         .padding(.horizontal, 10)
@@ -289,7 +297,7 @@ extension TimestampView {
 }
 
 fileprivate extension TimeZone {
-    static let UTC: TimeZone = TimeZone(identifier: "Europe/Dublin")!
+    static let UTC: TimeZone = .gmt
 }
 
 fileprivate extension Date {

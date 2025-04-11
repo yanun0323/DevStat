@@ -7,11 +7,11 @@ struct UpdaterView: View {
         Button {
             updater.checkForUpdates()
         } label: {
-            Text("檢查更新")
+            Text("check update")
                 .opacity(0.8)
                 .font(.system(.caption, weight: .regular))
                 .foregroundColor(.white)
-                .frame(width: 55, height: 18)
+                .frame(width: 85, height: 18)
                 .background(Color.gray.opacity(0.5))
                 .clipShape(RoundedRectangle(cornerRadius: 5))
         }

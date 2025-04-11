@@ -8,6 +8,14 @@ enum TimeDigit: String, CaseIterable {
 
 extension TimeDigit: Identifiable {
     var id: String { self.rawValue }
+    var string: String {
+        switch self {
+            case .second, .millisecond:
+                return self.rawValue
+            case .autoDetect:
+                return "Auto"
+        }
+    }
 }
 
 extension Int64 {
