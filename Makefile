@@ -1,5 +1,5 @@
 .PHONY:
 
-build:
+build:	
 	rm -rf appcast.xml;\
 	generate_appcast -o appcast.xml .

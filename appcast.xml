@@ -3,6 +3,27 @@
     <channel>
         <title>DevStat</title>
         <item>
+            <title>1.1.1</title>
+            <pubDate>Wed, 18 Jun 2025 18:51:30 +0800</pubDate>
+            <sparkle:version>D2S1V</sparkle:version>
+            <sparkle:shortVersionString>1.1.1</sparkle:shortVersionString>
+            <sparkle:minimumSystemVersion>26.0</sparkle:minimumSystemVersion>
+            <enclosure url="https://raw.githubusercontent.com/yanun0323/DevStat/master/DevStat-1.1.1.zip" length="3600285" type="application/octet-stream" sparkle:edSignature="fkTrbVGE0FolCob3tMQRNA5Uqws4X0X/p9nCVymwM6a1BEnVIDVpkyI1Pd1uXt8WsfF5q7lHrix11Kt9aAR1DA=="/>
+            <sparkle:deltas>
+                <enclosure url="https://raw.githubusercontent.com/yanun0323/DevStat/master/DevStatD2S1V-D2S0V.delta" sparkle:deltaFrom="D2S0V" length="104622" type="application/octet-stream" sparkle:deltaFromSparkleExecutableSize="862448" sparkle:deltaFromSparkleLocales="de,he,ar,el,ja,fa,en" sparkle:edSignature="MaWK0adOq7nJToTXnfsNOEmTJncWd8ZI6gAVJii0REOGaOuAuFiJ/26Qy2mJNtSB8ob90FFp+hFpTaOeZw0DBQ=="/>
+                <enclosure url="https://raw.githubusercontent.com/yanun0323/DevStat/master/DevStatD2S1V-D1S9V.delta" sparkle:deltaFrom="D1S9V" length="460962" type="application/octet-stream" sparkle:deltaFromSparkleExecutableSize="864784" sparkle:deltaFromSparkleLocales="de,he,ar,el,ja,fa,en" sparkle:edSignature="jyc+zE2+QnOY2N9X1Itqt66/dJp6jowXsWNw5kJ8Sr7ekGD6KEGmIjgPPrgKLADR9rqNju9RXZHT7IkpTDaHAA=="/>
+                <enclosure url="https://raw.githubusercontent.com/yanun0323/DevStat/master/DevStatD2S1V-D1S8V.delta" sparkle:deltaFrom="D1S8V" length="487570" type="application/octet-stream" sparkle:deltaFromSparkleExecutableSize="865040" sparkle:deltaFromSparkleLocales="de,he,ar,el,ja,fa,en" sparkle:edSignature="uwwKwwLqOZ6hAIsNp0fcqpN4g3lSa496C7GJscGa+V2vrY6CewhbPHNxEiUZpM5iLA/wHugzaL9bLape4pUpBA=="/>
+            </sparkle:deltas>
+        </item>
+        <item>
+            <title>1.1.0</title>
+            <pubDate>Wed, 18 Jun 2025 18:37:20 +0800</pubDate>
+            <sparkle:version>D2S0V</sparkle:version>
+            <sparkle:shortVersionString>1.1.0</sparkle:shortVersionString>
+            <sparkle:minimumSystemVersion>26.0</sparkle:minimumSystemVersion>
+            <enclosure url="https://raw.githubusercontent.com/yanun0323/DevStat/master/DevStat-1.1.0.zip" length="3598443" type="application/octet-stream" sparkle:edSignature="R+EXxJfpOpiZ9GZv14za68pgj1vk2/33p+2tKucrzdVnP+qofQbDhapzIaaLVZmXPKHjSgAAYhXoHXaQdWmXCg=="/>
+        </item>
+        <item>
             <title>1.0.9</title>
             <pubDate>Fri, 11 Apr 2025 16:15:38 +0800</pubDate>
             <sparkle:version>D1S9V</sparkle:version>

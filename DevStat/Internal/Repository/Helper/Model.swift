@@ -2,8 +2,6 @@ import SwiftUI
 import SQLite
 import Sworm
 
-typealias Expression = SQLite.Expression
-
 // MARK: - Log
 
 extension LogType: Value {
@@ -114,3 +112,4 @@ extension Setting: Model {
         ]
     }
 }
+

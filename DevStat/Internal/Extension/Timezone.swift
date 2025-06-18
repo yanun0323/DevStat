@@ -19,6 +19,6 @@ extension TimeZone {
     }
 }
 
-extension TimeZone: Identifiable {
+extension TimeZone: @retroactive Identifiable {
     public var id: Int { self.secondsFromGMT()}
 }

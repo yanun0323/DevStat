@@ -1,54 +1,72 @@
-import SwiftUI
 import Sparkle
+import SwiftUI
 
 struct ContentView: View {
-    @Environment(\.injected) private var container
-    @State private var error: Error?
-    
-    private let version = "v\(Bundle.main.infoDictionary?["CFBundleShortVersionString"] as? String ?? "-")"
+  @Environment(\.injected) private var container
+  @State private var error: Error?
 
-    var body: some View {
-        VStack {
-            HStack(spacing: 6) {
-                HStack(alignment: .bottom, spacing: 5) {
-                    Text("DevStat")
-                        .font(.system(size: 14))
-                        .kerning(1)
-                        .opacity(0.8)
-                    
-                    Text(version)
-                        .opacity(0.2)
-                        .font(.caption)
-                }
-                
-                Spacer(minLength: 0)
-                
-                UpdaterView()
-                
-                Button(role: .destructive) {
-                    NSApplication.shared.terminate(self)
-                } label: {
-                    Image(systemName: "power")
-                        .font(.system(.caption, weight: .medium))
-                        .foregroundColor(.white)
-                        .frame(width: 20, height: 18)
-                        .background(Color.red)
-                        .clipShape(RoundedRectangle(cornerRadius: 5))
-                }
-                .buttonStyle(.plain)
-            }
-            .padding([.horizontal, .top])
-            
-            TimestampView()
+  private let version =
+    "v\(Bundle.main.infoDictionary?["CFBundleShortVersionString"] as? String ?? "-")"
+
+  var body: some View {
+    VStack {
+      HStack(spacing: 6) {
+        HStack(alignment: .bottom, spacing: 5) {
+          Text("DevStat")
+            .font(.system(size: 14))
+            .kerning(1)
+            .opacity(0.8)
+
+          Text(version)
+            .opacity(0.2)
+            .font(.caption)
         }
-        .monospacedDigit()
-        .onReceive(container.state.error) { error = $0 }
+
+        Spacer(minLength: 0)
+
+        UpdaterView()
+
+        Button(role: .destructive) {
+          NSApplication.shared.terminate(self)
+        } label: {
+          Image(systemName: "power")
+            .font(.system(.caption, weight: .medium))
+            .foregroundColor(.white)
+            .frame(width: 20, height: 18)
+            .background(Color.red)
+            .clipShape(RoundedRectangle(cornerRadius: 5))
+        }
+        .buttonStyle(.plain)
+      }
+      .padding([.horizontal, .top])
+
+      TimestampView()
     }
+    .monospacedDigit()
+    .onReceive(container.state.error) { error = $0 }
+    .modifier(glass())
+  }
 }
 
 #if DEBUG
-#Preview {
+  #Preview {
     ContentView()
-        .inject(.inMemory)
-}
+      .inject(.inMemory)
+  }
 #endif
+
+struct glass: ViewModifier {
+  func body(content: Content) -> some View {
+    if #available(macOS 26.0, *) {
+      content
+        .glassEffect(.regular, in: RoundedRectangle(cornerRadius: 15))
+    } else {
+      content
+    }
+  }
+}
+
+#Preview {
+  Text("Hello, world!")
+    .modifier(glass())
+}

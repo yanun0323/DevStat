@@ -31,7 +31,7 @@ struct TimestampView: View {
     
     var body: some View {
         VStack {
-            Spacer()
+            // Spacer()
             VStack(spacing: 10) {
                 timezonePicker()
                 timeUnitsPicker()
