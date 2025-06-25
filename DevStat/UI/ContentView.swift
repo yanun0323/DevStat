@@ -44,7 +44,6 @@ struct ContentView: View {
     }
     .monospacedDigit()
     .onReceive(container.state.error) { error = $0 }
-    .modifier(glass())
   }
 }
 

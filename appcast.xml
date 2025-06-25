@@ -3,17 +3,26 @@
     <channel>
         <title>DevStat</title>
         <item>
+            <title>1.1.2</title>
+            <pubDate>Thu, 26 Jun 2025 02:20:50 +0800</pubDate>
+            <sparkle:version>D2S2V</sparkle:version>
+            <sparkle:shortVersionString>1.1.2</sparkle:shortVersionString>
+            <sparkle:minimumSystemVersion>26.0</sparkle:minimumSystemVersion>
+            <enclosure url="https://raw.githubusercontent.com/yanun0323/DevStat/master/DevStat-1.1.2.zip" length="3598162" type="application/octet-stream" sparkle:edSignature="T5dsVnpo13sWd5+t/mU/p81fBqwG47UGgUksysjQwmxD/ksS5HMTYxh3EL+k8/NQNE4K/buRiNax1QeItaixCw=="/>
+            <sparkle:deltas>
+                <enclosure url="https://raw.githubusercontent.com/yanun0323/DevStat/master/DevStatD2S2V-D2S1V.delta" sparkle:deltaFrom="D2S1V" length="158918" type="application/octet-stream" sparkle:deltaFromSparkleExecutableSize="862448" sparkle:deltaFromSparkleLocales="de,he,ar,el,ja,fa,en" sparkle:edSignature="Pj2UAPn3tzk8ywpEcjjPkOJ1udj/spVTgeG4eDTSLmEyDPxJeC3W9pW5m2mKtdz2g8pB8u7eKaddIpYFcdSNCw=="/>
+                <enclosure url="https://raw.githubusercontent.com/yanun0323/DevStat/master/DevStatD2S2V-D2S0V.delta" sparkle:deltaFrom="D2S0V" length="159878" type="application/octet-stream" sparkle:deltaFromSparkleExecutableSize="862448" sparkle:deltaFromSparkleLocales="de,he,ar,el,ja,fa,en" sparkle:edSignature="BedIlSIIS4oZcW+RALDhN0/d+WkoAmaHzq9FGSHeQQHJfe6LjKxRGkU1HIPghz15FUX8r6AnZytWDnehiux4Ag=="/>
+                <enclosure url="https://raw.githubusercontent.com/yanun0323/DevStat/master/DevStatD2S2V-D1S9V.delta" sparkle:deltaFrom="D1S9V" length="466110" type="application/octet-stream" sparkle:deltaFromSparkleExecutableSize="864784" sparkle:deltaFromSparkleLocales="de,he,ar,el,ja,fa,en" sparkle:edSignature="ojfdjggtzSxSeoStqVpjioluQuvotx4UQ5ZMKjSYkQIGaCxfj5U+1ptlhlcmvxMnatBn7JLJw0Gzy9ubjX2tDg=="/>
+                <enclosure url="https://raw.githubusercontent.com/yanun0323/DevStat/master/DevStatD2S2V-D1S8V.delta" sparkle:deltaFrom="D1S8V" length="492810" type="application/octet-stream" sparkle:deltaFromSparkleExecutableSize="865040" sparkle:deltaFromSparkleLocales="de,he,ar,el,ja,fa,en" sparkle:edSignature="EULzA6t9kEnkotPvV/pg0b0yG0o9PbtKpC2KhiVMN7oizMLRfAAknQeZlDXpIWkw8KL/l+eZRtimfXYp8t3YDQ=="/>
+            </sparkle:deltas>
+        </item>
+        <item>
             <title>1.1.1</title>
             <pubDate>Wed, 18 Jun 2025 18:51:30 +0800</pubDate>
             <sparkle:version>D2S1V</sparkle:version>
             <sparkle:shortVersionString>1.1.1</sparkle:shortVersionString>
             <sparkle:minimumSystemVersion>26.0</sparkle:minimumSystemVersion>
             <enclosure url="https://raw.githubusercontent.com/yanun0323/DevStat/master/DevStat-1.1.1.zip" length="3600285" type="application/octet-stream" sparkle:edSignature="fkTrbVGE0FolCob3tMQRNA5Uqws4X0X/p9nCVymwM6a1BEnVIDVpkyI1Pd1uXt8WsfF5q7lHrix11Kt9aAR1DA=="/>
-            <sparkle:deltas>
-                <enclosure url="https://raw.githubusercontent.com/yanun0323/DevStat/master/DevStatD2S1V-D2S0V.delta" sparkle:deltaFrom="D2S0V" length="104622" type="application/octet-stream" sparkle:deltaFromSparkleExecutableSize="862448" sparkle:deltaFromSparkleLocales="de,he,ar,el,ja,fa,en" sparkle:edSignature="MaWK0adOq7nJToTXnfsNOEmTJncWd8ZI6gAVJii0REOGaOuAuFiJ/26Qy2mJNtSB8ob90FFp+hFpTaOeZw0DBQ=="/>
-                <enclosure url="https://raw.githubusercontent.com/yanun0323/DevStat/master/DevStatD2S1V-D1S9V.delta" sparkle:deltaFrom="D1S9V" length="460962" type="application/octet-stream" sparkle:deltaFromSparkleExecutableSize="864784" sparkle:deltaFromSparkleLocales="de,he,ar,el,ja,fa,en" sparkle:edSignature="jyc+zE2+QnOY2N9X1Itqt66/dJp6jowXsWNw5kJ8Sr7ekGD6KEGmIjgPPrgKLADR9rqNju9RXZHT7IkpTDaHAA=="/>
-                <enclosure url="https://raw.githubusercontent.com/yanun0323/DevStat/master/DevStatD2S1V-D1S8V.delta" sparkle:deltaFrom="D1S8V" length="487570" type="application/octet-stream" sparkle:deltaFromSparkleExecutableSize="865040" sparkle:deltaFromSparkleLocales="de,he,ar,el,ja,fa,en" sparkle:edSignature="uwwKwwLqOZ6hAIsNp0fcqpN4g3lSa496C7GJscGa+V2vrY6CewhbPHNxEiUZpM5iLA/wHugzaL9bLape4pUpBA=="/>
-            </sparkle:deltas>
         </item>
         <item>
             <title>1.1.0</title>

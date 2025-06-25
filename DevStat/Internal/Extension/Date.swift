@@ -19,7 +19,8 @@ extension Date {
 extension Date {
     /** Return the second for 1970-01-01 00:00:00 UTC */
     public var unix: Int64 { Int64(self.timeIntervalSince1970) }
-    public var unixMilli: Int64 { Int64(self.timeIntervalSince1970*1000) }
+    public var unixMilli: Int64 { Int64(self.timeIntervalSince1970*1_000) }
+    public var unixNano: Int64 { Int64(self.timeIntervalSince1970*1_000_000) }
     
     public func string(_ layout: DateFormatLayout = .Default, _ locale: Locale = .autoupdatingCurrent, timezone: TimeZone? = nil) -> String {
         let dateFormatter = DateFormatter()

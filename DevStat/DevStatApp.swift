@@ -9,92 +9,132 @@ import SwiftUI
 
 @main
 struct DevStatApp: App {
-  @NSApplicationDelegateAdaptor(AppDelegate.self) var delegate
-  @Environment(\.scenePhase) var scenePhase
+  // @NSApplicationDelegateAdaptor(AppDelegate.self) var delegate
+  // @Environment(\.scenePhase) var scenePhase
+  @AppStorage("showMenuBarExtra") private var showMenuBarExtra = true
+  private let container = DIContainer(param: .production)
 
   var body: some Scene {
     Settings {
       EmptyView()
     }
+
+    MenuBarExtra(
+      "DevStat", systemImage: "tortoise",
+      isInserted: $showMenuBarExtra
+    ) {
+      ContentView()
+        // .background(.clear)
+        .textEditorCommand()
+        .environment(\.injected, container)
+        .globalHotkey()
+    }
+    .menuBarExtraStyle(.window)
   }
 }
 
-class AppDelegate: NSObject, NSApplicationDelegate, ObservableObject {
+// MARK: - Separated Components
+@MainActor
+class MenuBarManager: ObservableObject {
+  private var statusItem: NSStatusItem?
+  private var popover: NSPopover?
 
-  public var statusItem: NSStatusItem?
-  private var popOver = NSPopover()
-  private var container = DIContainer(param: .production)
-  private var isAppOpen = false
+  func setupMenuBar(with contentView: some View) {
+    let statusItem = NSStatusBar.system.statusItem(withLength: NSStatusItem.variableLength)
+    let popover = createPopover(with: AnyView(contentView))
 
-  @MainActor func applicationDidFinishLaunching(_ notification: Notification) {
-    popOver.setValue(true, forKeyPath: "shouldHideAnchor")
-    popOver.contentSize = CGSize(width: 275, height: 225)
-    popOver.appearance = NSAppearance(named: .aqua)
-    popOver.behavior = .transient
-    popOver.animates = true
-    popOver.contentViewController = NSHostingController(
-      rootView: ContentView()
-        .background(.clear)
-        .textEditorCommand()
-        .environment(\.injected, container)
-        .environment(\.popOver, popOver)
-        .hotkey(
-          key: .kVK_ANSI_S, keyBase: [KeyBase.command, .option],
-          action: {
-            self.togglePopover()
-          })
-    )
+    setupStatusButton(statusItem)
 
-    makePopoverTransparent(popOver)
-
-    statusItem = NSStatusBar.system.statusItem(withLength: NSStatusItem.variableLength)
-
-    //        _ = container.appstate.pubOpenMenubarAppTrigger.sink { self.isAppOpen = $0 }
-
-    if let statusButton = statusItem?.button {
-      #if DEBUG
-        statusButton.image = NSImage(
-          systemSymbolName: "tortoise.fill", accessibilityDescription: nil)
-      #else
-        statusButton.image = NSImage(systemSymbolName: "tortoise", accessibilityDescription: nil)
-      #endif
-      statusButton.action = #selector(togglePopover)
-    }
+    self.statusItem = statusItem
+    self.popover = popover
   }
 
-  @objc public func togglePopover() {
-    if let button = statusItem?.button {
-      //            self.container.interactor.system.pushOpenMenubarAppTrigger(self.isAppOpen)
-      //            self.container.interactor.updater.checkForUpdates()
-      self.popOver.show(relativeTo: button.bounds, of: button, preferredEdge: NSRectEdge.maxY)
-      makePopoverTransparent(popOver)
-    }
+  private func createPopover(with contentView: AnyView) -> NSPopover {
+    let popover = NSPopover()
+    popover.setValue(true, forKeyPath: "shouldHideAnchor")
+    popover.contentSize = CGSize(width: 275, height: 225)
+    popover.appearance = NSAppearance(named: .aqua)
+    popover.behavior = .transient
+    popover.animates = true
+
+    let controller = NSHostingController(rootView: contentView)
+    controller.view.wantsLayer = true
+    controller.view.layer?.backgroundColor = .clear
+    controller.view.layer?.masksToBounds = true
+    controller.view.layer?.cornerRadius = 10
+    controller.view.layer?.borderColor = NSColor.black.cgColor
+    controller.view.layer?.shadowColor = NSColor.clear.cgColor
+    controller.view.layer?.shadowOpacity = 0
+    controller.view.layer?.isOpaque = false
+    controller.view.layer?.backgroundColor = NSColor.clear.cgColor
+    controller.view.layer?.shadowRadius = 0
+    controller.view.layer?.shadowPath = nil
+    popover.contentViewController = controller
+    return popover
   }
 
-  func makePopoverTransparent(_ popOver: NSPopover) {
-    DispatchQueue.main.async {
-      if let window = popOver.contentViewController?.view.window {
+  private func setupStatusButton(_ statusItem: NSStatusItem) {
+    guard let button = statusItem.button else { return }
 
-        // Ensure these modifications maintain transparency.
-        window.isOpaque = false
-        window.backgroundColor = .clear
+    #if DEBUG
+      button.image = NSImage(systemSymbolName: "tortoise.fill", accessibilityDescription: nil)
+    #else
+      button.image = NSImage(systemSymbolName: "tortoise", accessibilityDescription: nil)
+    #endif
 
-        // Disable shadows for the pop-over content.
-        window.hasShadow = false
+    button.action = #selector(togglePopover)
+    button.target = self
+  }
 
-        // Remove any visual effect background, such as NSVisualEffectView if present
-        if let effectView = window.contentView?.superview?.subviews.first(where: {
-          $0 is NSVisualEffectView
-        }) as? NSVisualEffectView {
-          effectView.state = .inactive
-          effectView.isHidden = true
+  @objc private func togglePopover() {
+    guard let button = statusItem?.button,
+      let popover = popover
+    else { return }
 
-          // Optionally, set the alpha to 0 instead of just hiding it.
-          effectView.alphaValue = 0.0
-        }
-      }
+    if popover.isShown {
+      popover.performClose(nil)
+    } else {
+      popover.show(relativeTo: button.bounds, of: button, preferredEdge: .maxY)
     }
   }
+}
+
+// MARK: - Simplified AppDelegate
+@MainActor
+class AppDelegate: NSObject, NSApplicationDelegate {
+  private let container = DIContainer(param: .production)
+  private let menuBarManager = MenuBarManager()
+
+  func applicationDidFinishLaunching(_ notification: Notification) {
+    setupMenuBar()
+  }
+
+  private func setupMenuBar() {
+    let contentView = ContentView()
+      .background(.clear)
+      .textEditorCommand()
+      .environment(\.injected, container)
+      .globalHotkey()
+
+    menuBarManager.setupMenuBar(with: contentView)
+  }
+}
+
+// MARK: - Global Hotkey Extension
+extension View {
+  func globalHotkey() -> some View {
+    self.hotkey(
+      key: .kVK_ANSI_S,
+      keyBase: [KeyBase.command, .option]
+    ) {
+      // Use notification or delegate pattern instead of direct reference
+      NotificationCenter.default.post(name: .toggleMenuBar, object: nil)
+    }
+  }
+}
+
+extension Notification.Name {
+  static let toggleMenuBar = Notification.Name("toggleMenuBar")
 }
 
 extension NSPopover: @retroactive EnvironmentKey {
