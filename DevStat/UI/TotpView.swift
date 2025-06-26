@@ -23,7 +23,7 @@ struct TotpView: View {
         ZStack {
             if let otp = otp {
                 Button {
-                    copy(otp.secrete)
+                    copy(password)
                 } label: {
                     VStack(spacing: 5) {
                         HStack {
@@ -121,8 +121,10 @@ struct TotpView: View {
         }
     }
     
-    func copy(_ text: String) {
-        NSPasteboard.general.setString(text, forType: .string)
+    func copy(_ stringToCopy: String) {
+        let pasteboard = NSPasteboard.general
+        pasteboard.clearContents()
+        pasteboard.setString(stringToCopy, forType: .string)
     }
 }
     
