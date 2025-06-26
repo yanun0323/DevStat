@@ -1,5 +1,6 @@
 import Sparkle
 import SwiftUI
+import SwiftData
 
 struct ContentView: View {
   @Environment(\.injected) private var container
@@ -41,6 +42,11 @@ struct ContentView: View {
       .padding([.horizontal, .top])
 
       TimestampView()
+        
+      TotpView()
+            .padding(.horizontal)
+        
+      Spacer()
     }
     .monospacedDigit()
     .onReceive(container.state.error) { error = $0 }
@@ -51,6 +57,8 @@ struct ContentView: View {
   #Preview {
     ContentView()
       .inject(.inMemory)
+      .frame(width: 275, height: 300)
+      .modelContainer(for: [OTP.self], inMemory: true)
   }
 #endif
 
@@ -63,9 +71,4 @@ struct glass: ViewModifier {
       content
     }
   }
-}
-
-#Preview {
-  Text("Hello, world!")
-    .modifier(glass())
 }

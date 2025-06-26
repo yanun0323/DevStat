@@ -3,10 +3,12 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 56;
+	objectVersion = 70;
 	objects = {
 
 /* Begin PBXBuildFile section */
+		A8A326DC2E0D131A00FF3774 /* TotpView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A8A326DB2E0D131A00FF3774 /* TotpView.swift */; };
+		A8A326E22E0D8BF300FF3774 /* OTP.swift in Sources */ = {isa = PBXBuildFile; fileRef = A8A326E12E0D8BF300FF3774 /* OTP.swift */; };
 		A8FB10662CDA2380005A78CB /* TimeDigit.swift in Sources */ = {isa = PBXBuildFile; fileRef = A8FB10652CDA2380005A78CB /* TimeDigit.swift */; };
 		CE1E37D92C6C720D009B0C80 /* DevStatApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE1E37D82C6C720D009B0C80 /* DevStatApp.swift */; };
 		CE1E37DC2C6C720D009B0C80 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE1E37DB2C6C720D009B0C80 /* ContentView.swift */; };
@@ -47,6 +49,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		A8A326DB2E0D131A00FF3774 /* TotpView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TotpView.swift; sourceTree = "<group>"; };
+		A8A326E12E0D8BF300FF3774 /* OTP.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OTP.swift; sourceTree = "<group>"; };
 		A8FB10652CDA2380005A78CB /* TimeDigit.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimeDigit.swift; sourceTree = "<group>"; };
 		CE1E37D52C6C720D009B0C80 /* DevStat.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = DevStat.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		CE1E37D82C6C720D009B0C80 /* DevStatApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DevStatApp.swift; sourceTree = "<group>"; };
@@ -87,6 +91,10 @@
 		CEFBF4F22C7F1D4E001E38DF /* DevStat.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = DevStat.entitlements; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
+/* Begin PBXFileSystemSynchronizedRootGroup section */
+		A8A326D62E0D10FC00FF3774 /* Pkg */ = {isa = PBXFileSystemSynchronizedRootGroup; explicitFileTypes = {}; explicitFolders = (); path = Pkg; sourceTree = "<group>"; };
+/* End PBXFileSystemSynchronizedRootGroup section */
+
 /* Begin PBXFrameworksBuildPhase section */
 		CE1E37D22C6C720D009B0C80 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
@@ -124,6 +132,7 @@
 				CE1E37D82C6C720D009B0C80 /* DevStatApp.swift */,
 				CE1E37DA2C6C720D009B0C80 /* UI */,
 				CE1E37DD2C6C720D009B0C80 /* Internal */,
+				A8A326D62E0D10FC00FF3774 /* Pkg */,
 				CE1E38152C6C720D009B0C80 /* Resource */,
 				CE1E38182C6C720D009B0C80 /* Preview Content */,
 			);
@@ -137,6 +146,7 @@
 				CE1E38232C6C727A009B0C80 /* TimestampView.swift */,
 				CE7177AA2C78304E00AC98C7 /* InfoView.swift */,
 				CEFBF4EF2C7F18A3001E38DF /* UpdaterView.swift */,
+				A8A326DB2E0D131A00FF3774 /* TotpView.swift */,
 			);
 			path = UI;
 			sourceTree = "<group>";
@@ -172,6 +182,7 @@
 				A8FB10652CDA2380005A78CB /* TimeDigit.swift */,
 				CE4FC7362C7478B700888A98 /* Errors.swift */,
 				CE4FC7342C7470BC00888A98 /* Setting.swift */,
+				A8A326E12E0D8BF300FF3774 /* OTP.swift */,
 			);
 			path = Entity;
 			sourceTree = "<group>";
@@ -327,6 +338,9 @@
 			);
 			dependencies = (
 			);
+			fileSystemSynchronizedGroups = (
+				A8A326D62E0D10FC00FF3774 /* Pkg */,
+			);
 			name = DevStat;
 			packageProductDependencies = (
 				CE1E38212C6C726A009B0C80 /* Sworm */,
@@ -393,6 +407,7 @@
 				CE1E37F22C6C720D009B0C80 /* GeneralAppState.swift in Sources */,
 				CE1E37DC2C6C720D009B0C80 /* ContentView.swift in Sources */,
 				CE1E38002C6C720D009B0C80 /* MockSystemInteractor.swift in Sources */,
+				A8A326E22E0D8BF300FF3774 /* OTP.swift in Sources */,
 				CE1E37F52C6C720D009B0C80 /* MockAppState.swift in Sources */,
 				CE7177AB2C78304E00AC98C7 /* InfoView.swift in Sources */,
 				A8FB10662CDA2380005A78CB /* TimeDigit.swift in Sources */,
@@ -403,6 +418,7 @@
 				CE1E37E52C6C720D009B0C80 /* Log.swift in Sources */,
 				CE1E380C2C6C720D009B0C80 /* MockRepository.swift in Sources */,
 				CE1E37EC2C6C720D009B0C80 /* Repository.swift in Sources */,
+				A8A326DC2E0D131A00FF3774 /* TotpView.swift in Sources */,
 				CE1E38042C6C720D009B0C80 /* Model.swift in Sources */,
 				CE1E37FE2C6C720D009B0C80 /* MockInteractor.swift in Sources */,
 				CE1E37E82C6C720D009B0C80 /* AppState.swift in Sources */,
@@ -556,7 +572,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = DevStat/DevStat.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = D2S2V;
+				CURRENT_PROJECT_VERSION = D2S3V;
 				DEAD_CODE_STRIPPING = YES;
 				DEVELOPMENT_ASSET_PATHS = "";
 				ENABLE_APP_SANDBOX = YES;
@@ -574,7 +590,7 @@
 					"@loader_path/../Frameworks",
 				);
 				MACOSX_DEPLOYMENT_TARGET = 26.0;
-				MARKETING_VERSION = 1.1.2;
+				MARKETING_VERSION = 1.1.3;
 				PRODUCT_BUNDLE_IDENTIFIER = yanunyang.com.DevStat;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
@@ -589,7 +605,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = DevStat/DevStat.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = D2S2V;
+				CURRENT_PROJECT_VERSION = D2S3V;
 				DEAD_CODE_STRIPPING = YES;
 				DEVELOPMENT_ASSET_PATHS = "";
 				ENABLE_APP_SANDBOX = YES;
@@ -607,7 +623,7 @@
 					"@loader_path/../Frameworks",
 				);
 				MACOSX_DEPLOYMENT_TARGET = 26.0;
-				MARKETING_VERSION = 1.1.2;
+				MARKETING_VERSION = 1.1.3;
 				PRODUCT_BUNDLE_IDENTIFIER = yanunyang.com.DevStat;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;

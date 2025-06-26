@@ -6,6 +6,7 @@ import Sparkle
 //  Created by yanun.y on 2024/8/14.
 //
 import SwiftUI
+import SwiftData
 
 @main
 struct DevStatApp: App {
@@ -28,7 +29,9 @@ struct DevStatApp: App {
         .textEditorCommand()
         .environment(\.injected, container)
         .globalHotkey()
+        .modelContainer(for: [OTP.self], isAutosaveEnabled: true)
     }
+    .defaultSize(width: 275, height: 300)
     .menuBarExtraStyle(.window)
   }
 }
@@ -52,7 +55,7 @@ class MenuBarManager: ObservableObject {
   private func createPopover(with contentView: AnyView) -> NSPopover {
     let popover = NSPopover()
     popover.setValue(true, forKeyPath: "shouldHideAnchor")
-    popover.contentSize = CGSize(width: 275, height: 225)
+    popover.contentSize = CGSize(width: 275, height: 400)
     popover.appearance = NSAppearance(named: .aqua)
     popover.behavior = .transient
     popover.animates = true
