@@ -2,10 +2,13 @@ import SwiftUI
 import SwiftData
 
 @Model
-class OTP {
-    var secrete: String
+final class OTP {
+    var title: String = "OTP"
+    var secrete: String = ""
+    var createdAt: Int64 = Date.now.unixMilli
     
-    init(secrete: String) {
+    init(title: String, secrete: String) {
+        self.title = title
         self.secrete = secrete
     }
 }

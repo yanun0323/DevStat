@@ -43,7 +43,7 @@ struct ContentView: View {
 
       TimestampView()
         
-      TotpView()
+      TotpTabView()
             .padding(.horizontal)
         
       Spacer()
@@ -57,7 +57,7 @@ struct ContentView: View {
   #Preview {
     ContentView()
       .inject(.inMemory)
-      .frame(width: 275, height: 300)
+      .frame(width: 275, height: 325)
       .modelContainer(for: [OTP.self], inMemory: true)
   }
 #endif

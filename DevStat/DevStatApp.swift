@@ -31,7 +31,7 @@ struct DevStatApp: App {
         .globalHotkey()
         .modelContainer(for: [OTP.self], isAutosaveEnabled: true)
     }
-    .defaultSize(width: 275, height: 300)
+    .defaultSize(width: 275, height: 325)
     .menuBarExtraStyle(.window)
   }
 }
