@@ -30,16 +30,13 @@ struct TimestampView: View {
   @State private var timezoneTag = Date.now.string("ZZZZ")
 
   var body: some View {
-    VStack {
-      // Spacer()
+    VStack(spacing: 0) {
       VStack(spacing: 10) {
         timezonePicker()
         timeUnitsPicker()
         dateTransfer()
       }
       .padding(5)
-
-      Spacer()
 
       if #available(macOS 14.0, *) {
         EmptyView()
@@ -55,7 +52,6 @@ struct TimestampView: View {
           .onChange(of: timezone) { _ in refreshTimezone() }
       }
     }
-    .scrollIndicators(.never)
     .onAppear {
       container.inter.system.fetchTimezone()
       container.inter.system.fetchTimeDigit()

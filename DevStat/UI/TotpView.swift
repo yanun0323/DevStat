@@ -5,6 +5,7 @@ struct TotpTabView: View {
     @Query(sort: \OTP.createdAt, animation: .easeInOut(duration: 0.2)) private var items: [OTP]
     @Environment(\.modelContext) private var context: ModelContext
     @AppStorage("OTP_CURRENT_IDX") private var index: Int?
+    @State private var isHoveredIndex: Bool = false
     private let gap: CGFloat = 5
     
     var body: some View {
@@ -68,16 +69,34 @@ struct TotpTabView: View {
                     .animation(.default, value: index)
                 }
                 
+                
                 HStack(spacing: 5) {
                     ForEach(items.indices, id: \.self) { i in
-                        Circle()
-                            .frame(width: 5)
-                            .opacity(index == i ? 0.8 : 0.2)
+                        Button {
+                            if index == i { return }
+                            withAnimation {
+                                index = i
+                            }
+                        } label: {
+                            Capsule()
+                                .frame(width: index == i ? 7 : 21, height: 7)
+                                .opacity(index == i ? 0.9 : 0.2)
+                        }
+                        .buttonStyle(.plain)
                     }
                     
-                    Circle()
-                        .frame(width: 5)
-                        .opacity(index == -1 ? 0.8 : 0.2)
+                    
+                    Button {
+                        if index == -1 { return }
+                        withAnimation {
+                            index = -1
+                        }
+                    } label: {
+                        Capsule()
+                            .frame(width: index == -1 ? 7 : 21, height: 7)
+                            .opacity(index == -1 ? 0.9 : 0.2)
+                    }
+                    .buttonStyle(.plain)
                 }
             }
             .padding(.vertical, 5)
